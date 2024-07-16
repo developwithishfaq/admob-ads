@@ -5,7 +5,6 @@ import com.example.adsxml.di.SharedModule
 import com.example.app_open.AdmobAppOpenAd
 import com.example.app_open.AppOpenAdsManager
 import com.example.app_open.IshfaqBaseApp
-import com.example.app_open.di.AppOpenModules
 import com.example.core.FullScreenAdsShowListener
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -18,7 +17,7 @@ class BaseApp : IshfaqBaseApp() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            modules(SharedModule + AppOpenModules)
+            modules(SharedModule)
             androidContext(applicationContext)
         }
         appOpenAdsManager.addNewController("MainAppOpen", "ca-app-pub-3940256099942544/9257395921")
