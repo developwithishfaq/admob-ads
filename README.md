@@ -169,6 +169,14 @@ So for that we made the whole integration easy.
 Extend Your App Class With **IshfaqBaseApp**
 ```
   class BaseApp : IshfaqBaseApp() {
+      // I Used Koin Di to inject it , you can use hilt too, But keep instance as Singelton
+      private val appOpenAdsManager: IshfaqAppOpenAdsManager by inject()
+
+      override fun onCreate() {
+           super.onCreate()
+           // Must Call This , it will attach listeners.
+           initAppOpenAds(appOpenAdsManager)
+      }
       override fun onShowAppOpenAd(activity: Activity) {
 
       }
@@ -177,8 +185,8 @@ Extend Your App Class With **IshfaqBaseApp**
       }  
   }
 ```
-This will override two functions.<br>
-**onShowAppOpenAd**<br>
+This will override two functions. But Also remeber to call initAppOpenAds(appOpenAdsManager), this will attach to process lifecycle of Application<br>
+**onShowAppOpenAd**<br><br>
 This is called after approval of **canShowAppOpenAd**.<br>
 So here in this function we have to write actual code for showing App Open Ad
 
