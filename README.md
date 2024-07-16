@@ -13,7 +13,7 @@ allprojects {
 
 ```gradle
 dependencies {
-     implementation("com.github.developwithishfaq:admob-ads:0.2")
+     implementation("com.github.developwithishfaq:admob-ads:0.7")
 }
 ```
 
