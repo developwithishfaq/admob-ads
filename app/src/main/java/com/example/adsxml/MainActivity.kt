@@ -3,9 +3,9 @@ package com.example.adsxml
 import android.os.Bundle
 import com.example.adsxml.databinding.ActivityMainBinding
 import com.example.banner_ads.IshfaqBannerAdsManager
-import com.example.core.FullScreenAdsShowListener
 import com.example.core.IshfaqAdsSdk
 import com.example.core.ad_units.IshfaqInterstitialAd
+import com.example.core.commons.AdsCommons.logAds
 import com.example.core.commons.IshfaqConfigs
 import com.example.inter.IshfaqInterstitialAdsManager
 import com.example.native_ads.IshfaqNativeAdsManager
@@ -34,29 +34,6 @@ class MainActivity : IshfaqNativeAdsActivity() {
         )
         val controller = interAdsManager.getAdController("MainInter")
         val interAd = controller?.getAvailableAd() as? IshfaqInterstitialAd
-        interAd?.showInter(
-            context = this@MainActivity,
-            callBack = object : FullScreenAdsShowListener {
-                override fun onAdShownFailed() {
-                    super.onAdShownFailed()
-                }
-
-                override fun onAdDismiss() {
-                    super.onAdDismiss()
-                }
-
-                override fun onAdShown() {
-                    super.onAdShown()
-                }
-
-                override fun onAdClick() {
-                    super.onAdClick()
-                }
-            }
-        )
-
-        /*controller?.loadAd(context = this@MainActivity, callback = null)
-        */
 
         binding.showAd.setOnClickListener {
             interAdsManager.tryShowingInterstitialAd(
@@ -66,7 +43,7 @@ class MainActivity : IshfaqNativeAdsActivity() {
                 requestNewIfNotAvailable = true,
                 requestNewIfAdShown = true,
                 onAdDismiss = { adShown: Boolean ->
-
+                    logAds("Ad Shown=$adShown")
                 }
             )
         }

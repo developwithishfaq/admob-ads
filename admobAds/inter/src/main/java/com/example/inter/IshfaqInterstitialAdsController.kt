@@ -26,7 +26,7 @@ internal class IshfaqInterstitialAdsController(
     }
 
     override fun loadAd(context: Activity, callback: AdsLoadingStatusListener?) {
-        logAds("App Open loadAd function called,enabled=$adEnabled,")
+        logAds("Interstitial loadAd function called,enabled=$adEnabled,requesting=${isAdRequesting()},isAdAvailable=${isAdAvailable()}")
         this.listener = callback
         if (adEnabled.not()) {
             listener?.onAdFailedToLoad("Ad is not enabled", -1)
@@ -63,7 +63,7 @@ internal class IshfaqInterstitialAdsController(
 
                 override fun onAdFailedToLoad(error: LoadAdError) {
                     super.onAdFailedToLoad(error)
-                    logAds("Native Ad Failed To Load key=$adKey")
+                    logAds("Interstitial Ad Failed To Load key=$adKey,error=${error.message},code=${error.code}")
                     canRequestAd = true
                     currentInterstitialAd = null
                     listener?.onAdFailedToLoad(error.message, error.code)

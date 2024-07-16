@@ -22,6 +22,7 @@ class BaseApp : IshfaqBaseApp() {
             androidContext(applicationContext)
         }
         appOpenAdsManager.addNewController("MainAppOpen", IshfaqConfigs.TestAppOpenId)
+        initAppOpenAds(appOpenAdsManager)
     }
 
     override fun onShowAppOpenAd(activity: Activity) {
@@ -38,6 +39,7 @@ class BaseApp : IshfaqBaseApp() {
                         override fun onAdDismiss() {
                             // Destroy Shown Ad
                             controller.destroyAd(activity)
+                            controller.loadAd(activity,null)
                         }
                     }
                 )

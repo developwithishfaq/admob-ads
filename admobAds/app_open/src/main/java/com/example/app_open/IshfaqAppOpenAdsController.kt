@@ -61,7 +61,7 @@ class IshfaqAppOpenAdsController(
 
                 override fun onAdFailedToLoad(error: LoadAdError) {
                     super.onAdFailedToLoad(error)
-                    logAds("Native Ad Failed To Load key=$adKey")
+                    logAds("App Open Ad Failed To Load key=$adKey")
                     canRequestAd = true
                     currentAppOpenAd = null
                     listener?.onAdFailedToLoad(error.message, error.code)

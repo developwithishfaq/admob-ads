@@ -44,10 +44,11 @@ class IshfaqInterstitialAdsManager : AdsManager {
             adToShow.showInter(context, object : FullScreenAdsShowListener {
                 override fun onAdDismiss() {
                     super.onAdDismiss()
+                    onAdDismiss.invoke(true)
+                    controller.destroyAd(context)
                     if (requestNewIfAdShown) {
                         controller.loadAd(context, null)
                     }
-                    onAdDismiss.invoke(true)
                 }
 
                 override fun onAdShownFailed() {

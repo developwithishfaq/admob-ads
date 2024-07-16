@@ -3,10 +3,8 @@ package com.example.app_open
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import org.koin.android.ext.android.inject
 
 abstract class IshfaqBaseApp : Application(), Application.ActivityLifecycleCallbacks {
-    private val appOpenAdsManager: IshfaqAppOpenAdsManager by inject()
 
     private var isAppInPause = false
     private var currentActivity: Activity? = null
@@ -16,10 +14,9 @@ abstract class IshfaqBaseApp : Application(), Application.ActivityLifecycleCallb
 
     override fun onCreate() {
         super.onCreate()
-        initBase()
     }
 
-    fun initBase() {
+    fun initAppOpenAds(appOpenAdsManager: IshfaqAppOpenAdsManager) {
         registerActivityLifecycleCallbacks(this)
         appOpenAdsManager.initAppOpen(object : AppOpenListener {
             override fun onShowAd() {
