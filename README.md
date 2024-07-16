@@ -87,4 +87,61 @@ We Made Easy For You To Implement Native Ads On Your Screens, Just Extend Your A
 ```
 Each paramteres is self descriptive.
 
+## Interstitial Ads Implementation
+At First create an instance of IshfaqInterstitialAdsManager.
+```
+  interAdsManager.addNewController(
+    adKey = "MainInter",
+    adId = IshfaqConfigs.TestInterId
+  )
+```
+**Loading Interstitials**
+```
+  val controller = interAdsManager.getAdController("MainInter")
+  controller?.loadAd(context = this@MainActivity, callback = null)
+```
+**Showing Interstitials**
+We can show an interstitial ad like that
+```
+  val controller = interAdsManager.getAdController("MainInter")
+  val interAd = controller?.getAvailableAd() as? IshfaqInterstitialAd
+  interAd?.showInter(
+      context = this@MainActivity,
+      callBack = object : FullScreenAdsShowListener {
+          override fun onAdShownFailed() {
+              super.onAdShownFailed()
+          }
+
+          override fun onAdDismiss() {
+              super.onAdDismiss()
+          }
+
+          override fun onAdShown() {
+              super.onAdShown()
+          }
+
+          override fun onAdClick() {
+              super.onAdClick()
+          }
+      }
+  )
+```
+This is good when you want all callbacks, But this is kind of lengthy way, so for that reason there
+is a function to show interstitial ad called **tryShowingInterstitialAd()**.
+```
+   interAdsManager.tryShowingInterstitialAd(
+     enable = true,
+     key = "MainInter",
+     context = this@MainActivity,
+     requestNewIfNotAvailable = true,
+     requestNewIfAdShown = true,     
+     onAdDismiss = { adShown: Boolean ->
+     }
+   )
+```
+This function will try to show an interstitial but if ad is not available this will call onDismiss() so your app flow 
+didn't disturb.
+There are some extra paramters like **requestNewIfNotAvailable** it means when ad is not available , this will call load ad
+against that key so next time ad must be ready to show, second interesting param is **requestNewIfAdShown**, this means 
+that if ad shown then also this will load a new ad so after showing first ad there will be another ad ready on that key.
 
