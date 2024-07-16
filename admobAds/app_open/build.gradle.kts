@@ -60,7 +60,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 from(components["release"])
                 groupId = "com.github.developwithishfaq"
-                artifactId = "ads_sdk"
+                artifactId = "app_open"
                 version = "1.0"
             }
         }

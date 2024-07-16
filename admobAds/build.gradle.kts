@@ -34,10 +34,6 @@ android {
         jvmTarget = "17"
     }
 }
-publishing {
-    publications {
-    }
-}
 
 dependencies {
 
@@ -64,7 +60,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 from(components["release"])
                 groupId = "com.github.developwithishfaq"
-                artifactId = "ads_sdk"
+                artifactId = "sdk"
                 version = "1.0"
             }
         }
