@@ -13,7 +13,7 @@ allprojects {
 
 ```gradle
 dependencies {
-     implementation("com.github.developwithishfaq:easy-fcm:1.2.1")
+     implementation("com.github.developwithishfaq:admob-ads:0.2")
 }
 ```
 
