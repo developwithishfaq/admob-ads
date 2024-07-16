@@ -41,6 +41,7 @@ Add Your Admob Original App Id Like This Inside Manifest <application
 ## Native/Banner Ads Implementation
 At First create an instance of IshfaqNativeAdsManager/IshfaqBannerAdsManager.
 ```
+  // Make Sure These Instance Are Singelton
   private val nativeAdsManager: IshfaqNativeAdsManager by inject()
   private val bannerAdsManager: IshfaqBannerAdsManager by inject()
 ```
@@ -70,7 +71,8 @@ We Made Easy For You To Implement Native Ads On Your Screens, Just Extend Your A
     enabled = true,
     adFrame = binding.adFrame,
     showShimmerLayout = true,
-    oneTimeUse = true // One time use means, every time u visit this screen new ad will be loaded
+    oneTimeUse = true, // One time use means, every time u visit this screen new ad will be loaded
+    nativeAdsManager = nativeAdsManager
   )
   // Show Banner Ad 
 
@@ -79,7 +81,8 @@ We Made Easy For You To Implement Native Ads On Your Screens, Just Extend Your A
     bannerType = BannerAdSizes.MediumRectangle,
     enabled = true,
     adFrame = binding.adFrame,
-    showShimmerLayout = true
+    showShimmerLayout = true,
+    bannersManager = bannerAdsManager
   )
 ```
 Each paramteres is self descriptive.
