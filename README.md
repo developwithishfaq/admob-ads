@@ -38,30 +38,43 @@ Add Your Admob Original App Id Like This Inside Manifest <application
   adsManager.initAdsSdk(mContext) {
   }
 ```
-## Native Ads Implementation
-At First create an instance of NativeAdsManager.
+## Native/Banner Ads Implementation
+At First create an instance of IshfaqNativeAdsManager/IshfaqBannerAdsManager.
 ```
-  private val nativeAdsManager: NativeAdsManager by inject()
+  private val nativeAdsManager: IshfaqNativeAdsManager by inject()
+  private val bannerAdsManager: IshfaqBannerAdsManager by inject()
 ```
-Now Create Controllers For Your Native Ads.
+Now Create Controllers For Your Native/Banner Ads.
 ```
   nativeAdsManager.addNewController(
     adKey = "MainNative",
-    adId = "ca-app-pub-3940256099942544/2247696110"
+    adId = IshfaqConfigs.TestNativeId
+  )
+  bannerAdsManager.addNewController(
+    adKey = "MainBanner",
+    adId = IshfaqConfigs.TestBannerId
   )
 ```
-Now Lets Show Native Ads
-We Made Easy For You To Implement Native Ads On Your Screens, Just Extend Your Activity With Sdk's **IshfaqNativeAdsActivity**, and call this funtion.
+Now Lets Show Native/Banner Ads
+We Made Easy For You To Implement Native Ads On Your Screens, Just Extend Your Activity With Sdk's **IshfaqNativeAdsActivity/IshfaqBannerAdsActivity**, and call this funtion.
 
 ```
   showNativeAd(
     key = "MainNative",
-    layoutName = "layout_name.xml",
+    layoutName = NativeTemplates.TemplateTwo, // Your Ad Layout Name 
     enabled = true,
     adFrame = binding.adFrame,
     showShimmerLayout = true,
-    oneTimeUse = true
-)
+    oneTimeUse = true // One time use means, every time u visit this screen new ad will be loaded
+  )
+
+  showBannerAd(
+    key = "MainBanner",
+    bannerType = BannerAdSizes.MediumRectangle,
+    enabled = true,
+    adFrame = binding.adFrame,
+    showShimmerLayout = true
+  )
 ```
 Each paramteres is self descriptive.
 
