@@ -185,8 +185,8 @@ Extend Your App Class With **IshfaqBaseApp**
       }  
   }
 ```
-This will override two functions.But Also remeber to call initAppOpenAds(appOpenAdsManager), this will attach to process lifecycle of Application<br>
-**onShowAppOpenAd**<br>
+This will override two functions. But Also remeber to call initAppOpenAds(appOpenAdsManager), this will attach to process lifecycle of Application<br>
+**onShowAppOpenAd**<br><br>
 This is called after approval of **canShowAppOpenAd**.<br>
 So here in this function we have to write actual code for showing App Open Ad
 
