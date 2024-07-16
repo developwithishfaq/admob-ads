@@ -143,7 +143,7 @@ is a function to show interstitial ad called **tryShowingInterstitialAd()**.
    )
 ```
 This function will try to show an interstitial but if ad is not available this will call onDismiss() so your app flow 
-didn't disturb.
+didn't disturb.<br>
 There are some extra paramters like **requestNewIfNotAvailable** it means when ad is not available , this will call load ad
 against that key so next time ad must be ready to show, second interesting param is **requestNewIfAdShown**, this means 
 that if ad shown then also this will load a new ad so after showing first ad there will be another ad ready on that key.
@@ -177,9 +177,9 @@ Extend Your App Class With **IshfaqBaseApp**
       }  
   }
 ```
-This will override two functions.
+This will override two functions.<br>
 **onShowAppOpenAd**<br>
-This is called after approval of **canShowAppOpenAd**.
+This is called after approval of **canShowAppOpenAd**.<br>
 So here in this function we have to write actual code for showing App Open Ad
 
 ```
