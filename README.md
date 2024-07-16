@@ -19,6 +19,17 @@ dependencies {
 
 # Ishfaq Ads Sdk
 Using this library we can Easily Implement Admob Ads.
+
+**App Id**
+Add Your Admob Original App Id Like This Inside Manifest <application 
+```
+  <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+  <meta-data
+    android:name="com.google.android.gms.ads.APPLICATION_ID"
+    android:value="ca-app-pub-3940256099942544~3347511713"/>
+```
+
+
 **Sdk Intialization**
 ```gradle
   // I am using koin for di
