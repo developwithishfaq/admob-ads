@@ -14,7 +14,7 @@ import com.example.native_ads.ui.IshfaqNativeView
 import com.facebook.shimmer.ShimmerFrameLayout
 import org.koin.android.ext.android.inject
 
-abstract class BaseNativeAdsActivity : AppCompatActivity() {
+abstract class IshfaqNativeAdsActivity : AppCompatActivity() {
 
     private val nativeAdsManager: NativeAdsManager by inject()
     private var nativeAdController: AdsController? = null
@@ -69,7 +69,7 @@ abstract class BaseNativeAdsActivity : AppCompatActivity() {
         }
         nativeAdController = nativeAdsManager.getAdController(key)
         nativeAdController?.loadAd(
-            (this@BaseNativeAdsActivity), object : AdsLoadingStatusListener {
+            (this@IshfaqNativeAdsActivity), object : AdsLoadingStatusListener {
                 override fun onAdLoaded() {
                     adLoaded = true
                     nativeAd = nativeAdController?.getAvailableAd()
@@ -85,9 +85,9 @@ abstract class BaseNativeAdsActivity : AppCompatActivity() {
 
     private fun showShimmerLayout() {
         val shimmerLayout =
-            LayoutInflater.from(this@BaseNativeAdsActivity).inflate(R.layout.shimmer, null, false)
+            LayoutInflater.from(this@IshfaqNativeAdsActivity).inflate(R.layout.shimmer, null, false)
 
-        val adLayout = layoutName.inflateLayoutByName(this@BaseNativeAdsActivity)
+        val adLayout = layoutName.inflateLayoutByName(this@IshfaqNativeAdsActivity)
 
         shimmerLayout?.findViewById<ShimmerFrameLayout>(R.id.shimmerRoot)?.let { shimmer ->
             shimmer.removeAllViews()
@@ -101,14 +101,14 @@ abstract class BaseNativeAdsActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        nativeAdController?.resetListener(this@BaseNativeAdsActivity)
+        nativeAdController?.resetListener(this@IshfaqNativeAdsActivity)
     }
 
 
     private fun populateNativeAd() {
         logAds("populateNativeAd Called")
         nativeAd?.let {
-            layoutName.inflateLayoutByName(this@BaseNativeAdsActivity)?.let { layout ->
+            layoutName.inflateLayoutByName(this@IshfaqNativeAdsActivity)?.let { layout ->
                 adFrame?.removeAllViews()
                 adFrame?.addView(layout)
                 layout.findViewById<IshfaqNativeView>(R.id.ishfaqNative)?.let { view ->
@@ -123,6 +123,6 @@ abstract class BaseNativeAdsActivity : AppCompatActivity() {
     }
 
     private fun destroyLoadedAd() {
-        nativeAdController?.destroyAd(this@BaseNativeAdsActivity)
+        nativeAdController?.destroyAd(this@IshfaqNativeAdsActivity)
     }
 }

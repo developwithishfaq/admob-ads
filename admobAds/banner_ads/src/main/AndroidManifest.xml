@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application>
         <activity
-            android:name=".base.BaseBannerAdsActivity"
+            android:name=".base.IshfaqBannerAdsActivity"
             android:exported="false" />
     </application>
 

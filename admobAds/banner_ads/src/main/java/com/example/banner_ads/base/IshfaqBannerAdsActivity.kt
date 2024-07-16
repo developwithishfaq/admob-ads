@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.banner_ads.AdmobBannerAd
 import com.example.banner_ads.AdmobBannerAdsController
 import com.example.banner_ads.BannerAdSizes
-import com.example.banner_ads.BannerAdsManager
+import com.example.banner_ads.IshfaqBannerAdsManager
 import com.example.banner_ads.R
 import com.example.core.AdsController
 import com.example.core.AdsLoadingStatusListener
@@ -16,8 +16,8 @@ import com.example.core.commons.NativeConstants.makeGone
 import com.facebook.shimmer.ShimmerFrameLayout
 import org.koin.android.ext.android.inject
 
-abstract class BaseBannerAdsActivity : AppCompatActivity() {
-    private val bannerAdsManager: BannerAdsManager by inject()
+abstract class IshfaqBannerAdsActivity : AppCompatActivity() {
+    private val ishfaqBannerAdsManager: IshfaqBannerAdsManager by inject()
     private var bannerAdController: AdsController? = null
     private var bannerAd: AdUnit? = null
 
@@ -70,10 +70,10 @@ abstract class BaseBannerAdsActivity : AppCompatActivity() {
         if (showShimmerLayout) {
             showShimmerLayout()
         }
-        bannerAdController = bannerAdsManager.getAdController(key)
+        bannerAdController = ishfaqBannerAdsManager.getAdController(key)
         (bannerAdController as? AdmobBannerAdsController)?.setAdSize(adSize)
         bannerAdController?.loadAd(
-            (this@BaseBannerAdsActivity), object : AdsLoadingStatusListener {
+            (this@IshfaqBannerAdsActivity), object : AdsLoadingStatusListener {
                 override fun onAdLoaded() {
                     adLoaded = true
                     bannerAd = bannerAdController?.getAvailableAd()
@@ -91,15 +91,15 @@ abstract class BaseBannerAdsActivity : AppCompatActivity() {
 
     fun populateAd() {
         (bannerAd as? AdmobBannerAd)?.populateAd(
-            this@BaseBannerAdsActivity,
+            this@IshfaqBannerAdsActivity,
             adFrame!!
         )
     }
 
     private fun showShimmerLayout() {
         val shimmerLayout =
-            LayoutInflater.from(this@BaseBannerAdsActivity).inflate(R.layout.shimmer, null, false)
-        val adLayout = adSize.layoutName.inflateLayoutByName(this@BaseBannerAdsActivity)
+            LayoutInflater.from(this@IshfaqBannerAdsActivity).inflate(R.layout.shimmer, null, false)
+        val adLayout = adSize.layoutName.inflateLayoutByName(this@IshfaqBannerAdsActivity)
         shimmerLayout?.findViewById<ShimmerFrameLayout>(R.id.shimmerRoot)?.let { shimmer ->
             shimmer.removeAllViews()
             shimmer.addView(adLayout)
@@ -110,12 +110,12 @@ abstract class BaseBannerAdsActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        bannerAdController?.resetListener(this@BaseBannerAdsActivity)
+        bannerAdController?.resetListener(this@IshfaqBannerAdsActivity)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        bannerAdController?.destroyAd(this@BaseBannerAdsActivity)
+        bannerAdController?.destroyAd(this@IshfaqBannerAdsActivity)
     }
 
 }

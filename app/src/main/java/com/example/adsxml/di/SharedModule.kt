@@ -1,6 +1,6 @@
 package com.example.adsxml.di
 
-import com.example.banner_ads.BannerAdsManager
+import com.example.banner_ads.IshfaqBannerAdsManager
 import com.example.core.IshfaqAdsSdk
 import com.example.inter.InterstitialAdsManager
 import com.example.native_ads.NativeAdsManager
@@ -17,7 +17,7 @@ val SharedModule = module {
         InterstitialAdsManager()
     }
     single {
-        BannerAdsManager()
+        IshfaqBannerAdsManager()
     }
     single {
         IshfaqAdsSdk()

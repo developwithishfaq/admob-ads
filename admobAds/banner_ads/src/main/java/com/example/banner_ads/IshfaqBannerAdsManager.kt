@@ -3,7 +3,7 @@ package com.example.banner_ads
 import com.example.core.AdsController
 import com.example.core.AdsManager
 
-class BannerAdsManager : AdsManager {
+class IshfaqBannerAdsManager : AdsManager {
 
     private val adsMap = HashMap<String, AdmobBannerAdsController>()
 

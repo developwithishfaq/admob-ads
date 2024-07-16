@@ -2,13 +2,13 @@ package com.example.adsxml
 
 import android.os.Bundle
 import com.example.adsxml.ads.showInterAd
-import com.example.adsxml.base.BaseActivity
+import com.example.adsxml.base.IshfaqActivity
 import com.example.adsxml.databinding.ActivityMainBinding
 import com.example.banner_ads.BannerAdSizes
 import com.example.core.IshfaqAdsSdk
 import org.koin.android.ext.android.inject
 
-class MainActivity : BaseActivity() {
+class MainActivity : IshfaqActivity() {
     private lateinit var binding: ActivityMainBinding
     private val adsManager: IshfaqAdsSdk by inject()
 
@@ -25,7 +25,7 @@ class MainActivity : BaseActivity() {
             adKey = "MainInter",
             adId = "ca-app-pub-3940256099942544/1033173712"
         )
-        bannerAdsManager.addNewController(
+        ishfaqBannerAdsManager.addNewController(
             adKey = "MainBanner",
             adId = "ca-app-pub-3940256099942544/9214589741"
         )
