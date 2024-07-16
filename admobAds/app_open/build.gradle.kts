@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("maven-publish")
 }
 
 android {
@@ -50,4 +51,18 @@ dependencies {
 
 
     implementation(project(":admobAds:core"))
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.developwithishfaq"
+                artifactId = "ads_sdk"
+                version = "1.0"
+            }
+        }
+    }
 }
