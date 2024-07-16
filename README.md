@@ -90,6 +90,9 @@ Each paramteres is self descriptive.
 ## Interstitial Ads Implementation
 At First create an instance of IshfaqInterstitialAdsManager.
 ```
+  private val interAdsManager: IshfaqInterstitialAdsManager by inject()
+
+  // Create Controller
   interAdsManager.addNewController(
     adKey = "MainInter",
     adId = IshfaqConfigs.TestInterId
@@ -144,4 +147,66 @@ didn't disturb.
 There are some extra paramters like **requestNewIfNotAvailable** it means when ad is not available , this will call load ad
 against that key so next time ad must be ready to show, second interesting param is **requestNewIfAdShown**, this means 
 that if ad shown then also this will load a new ad so after showing first ad there will be another ad ready on that key.
+## App Open Ads Implementation
+At First create an instance of IshfaqAppOpenAdsManager.
+```
+  private val appOpenAdsManager: IshfaqAppOpenAdsManager by inject()
+  // Create Controller
+  appOpenAdsManager.addNewController(
+    adKey = "MainAppOpen",
+    adId = IshfaqConfigs.TestAppOpenId
+  )
+```
+**Loading AppOpen**
+```
+  val controller = appOpenAdsManager.getAdController("MainAppOpen")
+  controller?.loadAd(context = activity, callback = null)
+```
+**Showing AppOpen**
+As App Opens Are Commonly Shown at When User Opens App From Pause State,implementing app open adds is kind of complex,
+So for that we made the whole integration easy.
+
+Extend Your App Class With **IshfaqBaseApp**
+```
+  class BaseApp : IshfaqBaseApp() {
+      override fun onShowAppOpenAd(activity: Activity) {
+
+      }
+      override fun canShowAppOpenAd(activity: Activity): Boolean {
+         return true // Your Condition, like if you dont want to show ad when user is on Splash -> activity !is SplashActivity
+      }  
+  }
+```
+This will override two functions.
+**onShowAppOpenAd**
+This is called after approval of **canShowAppOpenAd**.
+So here in this function we have to write actual code for showing App Open Ad
+
+```
+override fun onShowAppOpenAd(activity: Activity) {
+    val controller = appOpenAdsManager.getAdController("MainAppOpen")
+    controller?.let { controller ->
+        if (controller.isAdAvailable()) {
+            (controller.getAvailableAd() as? AdmobAppOpenAd)?.showAppOpen(
+                context = activity,
+                callBack = object : FullScreenAdsShowListener {
+                    override fun onAdShown() {
+
+                    }
+
+                    override fun onAdDismiss() {
+                        // Destroy Shown Ad
+                        controller.destroyAd(activity)
+                    }
+                }
+            )
+        } else {
+            controller.loadAd(activity, null)
+        }
+    }
+}
+```
+This will show ad when ad is available , in other case this will request an ad.
+
+
 
