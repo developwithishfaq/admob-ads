@@ -46,10 +46,13 @@ At First create an instance of IshfaqNativeAdsManager/IshfaqBannerAdsManager.
 ```
 Now Create Controllers For Your Native/Banner Ads.
 ```
+  //Native
   nativeAdsManager.addNewController(
     adKey = "MainNative",
     adId = IshfaqConfigs.TestNativeId
   )
+
+  //Banner
   bannerAdsManager.addNewController(
     adKey = "MainBanner",
     adId = IshfaqConfigs.TestBannerId
@@ -59,6 +62,8 @@ Now Lets Show Native/Banner Ads
 We Made Easy For You To Implement Native Ads On Your Screens, Just Extend Your Activity With Sdk's **IshfaqNativeAdsActivity/IshfaqBannerAdsActivity**, and call this funtion.
 
 ```
+  // Show Native Ad
+
   showNativeAd(
     key = "MainNative",
     layoutName = NativeTemplates.TemplateTwo, // Your Ad Layout Name 
@@ -67,6 +72,7 @@ We Made Easy For You To Implement Native Ads On Your Screens, Just Extend Your A
     showShimmerLayout = true,
     oneTimeUse = true // One time use means, every time u visit this screen new ad will be loaded
   )
+  // Show Banner Ad 
 
   showBannerAd(
     key = "MainBanner",
