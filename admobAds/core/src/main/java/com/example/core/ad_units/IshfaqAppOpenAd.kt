@@ -5,6 +5,6 @@ import com.example.core.FullScreenAdsShowListener
 import com.example.core.ad_units.core.AdUnit
 
 interface IshfaqAppOpenAd : AdUnit {
-    fun showInter(context: Activity, callBack: FullScreenAdsShowListener)
+    fun showAppOpen(context: Activity, callBack: FullScreenAdsShowListener)
     fun destroyAd()
 }

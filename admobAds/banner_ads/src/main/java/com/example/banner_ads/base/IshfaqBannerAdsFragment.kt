@@ -14,11 +14,9 @@ import com.example.core.ad_units.core.AdUnit
 import com.example.core.commons.NativeConstants.inflateLayoutByName
 import com.example.core.commons.NativeConstants.makeGone
 import com.facebook.shimmer.ShimmerFrameLayout
-import org.koin.android.ext.android.inject
 
 class IshfaqBannerAdsFragment : Fragment() {
 
-    private val ishfaqBannerAdsManager: IshfaqBannerAdsManager by inject()
     private var bannerAdController: AdsController? = null
     private var bannerAd: AdUnit? = null
 
@@ -30,8 +28,7 @@ class IshfaqBannerAdsFragment : Fragment() {
     private var adLoaded = false
     private var oneTimeUse = false
     private var showShimmerLayout = false
-
-
+    private var bannerAdsManager: IshfaqBannerAdsManager? = null
 
     override fun onResume() {
         super.onResume()
@@ -42,19 +39,21 @@ class IshfaqBannerAdsFragment : Fragment() {
 
     fun showBannerAd(
         key: String,
-        layoutName: BannerAdSizes = BannerAdSizes.Banner,
+        bannerType: BannerAdSizes = BannerAdSizes.Banner,
         enabled: Boolean,
         adFrame: FrameLayout,
+        bannersManager: IshfaqBannerAdsManager,
         showShimmerLayout: Boolean = true,
         oneTimeUse: Boolean = true
     ) {
         this.key = key
         this.enabled = enabled
         this.oneTimeUse = oneTimeUse
-        this.adSize = layoutName
+        this.adSize = bannerType
         this.showShimmerLayout = showShimmerLayout
         this.adLoaded = false
         this.adFrame = adFrame
+        this.bannerAdsManager = bannersManager
         isShowAdCalled = true
         loadAd()
     }
@@ -73,7 +72,7 @@ class IshfaqBannerAdsFragment : Fragment() {
         if (showShimmerLayout) {
             showShimmerLayout()
         }
-        bannerAdController = ishfaqBannerAdsManager.getAdController(key)
+        bannerAdController = bannerAdsManager?.getAdController(key)
         (bannerAdController as? AdmobBannerAdsController)?.setAdSize(adSize)
         bannerAdController?.loadAd(
             (requireActivity()), object : AdsLoadingStatusListener {
@@ -120,4 +119,5 @@ class IshfaqBannerAdsFragment : Fragment() {
         super.onDestroy()
         bannerAdController?.destroyAd(requireActivity())
     }
+
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import com.example.core.AdsController
 import com.example.core.AdsManager
 
-class AppOpenAdsManager : AdsManager, DefaultLifecycleObserver {
+class IshfaqAppOpenAdsManager : AdsManager, DefaultLifecycleObserver {
 
     private val adsMap = HashMap<String, IshfaqAppOpenAdsController>()
     private var listener: AppOpenListener? = null

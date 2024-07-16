@@ -26,7 +26,7 @@ internal class IshfaqInterstitialAdsController(
     }
 
     override fun loadAd(context: Activity, callback: AdsLoadingStatusListener?) {
-        logAds("loadAd function called,enabled=$adEnabled,")
+        logAds("App Open loadAd function called,enabled=$adEnabled,")
         this.listener = callback
         if (adEnabled.not()) {
             listener?.onAdFailedToLoad("Ad is not enabled", -1)
@@ -41,7 +41,7 @@ internal class IshfaqInterstitialAdsController(
             return
         }
         canRequestAd = false
-        logAds("Native Ad Requested key=$adKey")
+        logAds("Inter Ad Requested key=$adKey")
         InterstitialAd.load(
             context,
             adId.ifBlank { "ca-app-pub-3940256099942544/1033173712" },
@@ -51,7 +51,7 @@ internal class IshfaqInterstitialAdsController(
                     super.onAdLoaded(interAd)
 
                     // If your app is going to request only one native ad at a time, set the currentNativeAd reference to null.
-                    logAds("Native Ad Loaded key=$adKey")
+                    logAds("Inter Ad Loaded key=$adKey")
                     currentInterstitialAd?.let {
                         it.destroyAd()
                     }

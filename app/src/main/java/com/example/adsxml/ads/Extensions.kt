@@ -3,13 +3,13 @@ package com.example.adsxml.ads
 import android.app.Activity
 import com.example.core.FullScreenAdsShowListener
 import com.example.core.ad_units.IshfaqInterstitialAd
-import com.example.inter.InterstitialAdsManager
+import com.example.inter.IshfaqInterstitialAdsManager
 
 fun showInterAd(
     enable: Boolean,
     context: Activity,
     key: String,
-    interAdsManager: InterstitialAdsManager,
+    interAdsManager: IshfaqInterstitialAdsManager,
     requestNewIfNotAvailable: Boolean = true,
     requestNewAfterShowing: Boolean = true,
     onAdClosed: (Boolean) -> Unit,

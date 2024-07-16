@@ -6,13 +6,18 @@ import android.os.Bundle
 import org.koin.android.ext.android.inject
 
 abstract class IshfaqBaseApp : Application(), Application.ActivityLifecycleCallbacks {
-    private val appOpenAdsManager: AppOpenAdsManager by inject()
+    private val appOpenAdsManager: IshfaqAppOpenAdsManager by inject()
 
     private var isAppInPause = false
     private var currentActivity: Activity? = null
 
     abstract fun onShowAppOpenAd(activity: Activity)
     abstract fun canShowAppOpenAd(activity: Activity): Boolean
+
+    override fun onCreate() {
+        super.onCreate()
+        initBase()
+    }
 
     fun initBase() {
         registerActivityLifecycleCallbacks(this)

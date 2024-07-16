@@ -8,15 +8,14 @@ import com.example.core.AdsLoadingStatusListener
 import com.example.core.ad_units.core.AdUnit
 import com.example.core.commons.AdsCommons.logAds
 import com.example.core.commons.NativeConstants.inflateLayoutByName
-import com.example.native_ads.NativeAdsManager
+import com.example.native_ads.IshfaqNativeAdsManager
 import com.example.native_ads.R
 import com.example.native_ads.ui.IshfaqNativeView
 import com.facebook.shimmer.ShimmerFrameLayout
-import org.koin.android.ext.android.inject
 
 class IshfaqNativeAdsFragment : Fragment() {
 
-    private val nativeAdsManager: NativeAdsManager by inject()
+    private var nativeAdsManager: IshfaqNativeAdsManager? = null
     private var nativeAdController: AdsController? = null
     private var nativeAd: AdUnit? = null
 
@@ -29,11 +28,13 @@ class IshfaqNativeAdsFragment : Fragment() {
     private var oneTimeUse = false
     private var showShimmerLayout = false
 
+
     fun showNativeAd(
         key: String,
         layoutName: String = "native_ad_normal_layout",
         enabled: Boolean,
         adFrame: FrameLayout,
+        nativeAdsManager: IshfaqNativeAdsManager,
         showShimmerLayout: Boolean = true,
         oneTimeUse: Boolean = true
     ) {
@@ -42,6 +43,7 @@ class IshfaqNativeAdsFragment : Fragment() {
         this.layoutName = layoutName
         this.enabled = enabled
         this.showShimmerLayout = showShimmerLayout
+        this.nativeAdsManager = nativeAdsManager
         this.adLoaded = false
         this.adFrame = adFrame
         isShowAdCalled = true
@@ -66,12 +68,19 @@ class IshfaqNativeAdsFragment : Fragment() {
         if (showShimmerLayout) {
             showShimmerLayout()
         }
-        nativeAdController = nativeAdsManager.getAdController(key)
+        nativeAdController = nativeAdsManager?.getAdController(key)
         nativeAdController?.loadAd(
             (requireActivity()), object : AdsLoadingStatusListener {
                 override fun onAdLoaded() {
+                    if (adLoaded) {
+                        return
+                    }
                     adLoaded = true
                     nativeAd = nativeAdController?.getAvailableAd()
+                    logAds(
+                        "Fragment=On Ad Loaded,Is Ad Ok=${nativeAd != null}",
+                        isError = nativeAd == null
+                    )
                     populateNativeAd()
                 }
 
@@ -111,7 +120,7 @@ class IshfaqNativeAdsFragment : Fragment() {
                 adFrame?.removeAllViews()
                 adFrame?.addView(layout)
                 layout.findViewById<IshfaqNativeView>(R.id.ishfaqNative)?.let { view ->
-                    (nativeAdsManager as? NativeAdsManager)?.populateAd(view, it) {
+                    (nativeAdsManager as? IshfaqNativeAdsManager)?.populateAd(view, it) {
                         if (oneTimeUse) {
                             destroyLoadedAd()
                         }

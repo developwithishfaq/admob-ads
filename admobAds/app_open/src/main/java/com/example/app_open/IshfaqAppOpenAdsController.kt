@@ -40,7 +40,7 @@ class IshfaqAppOpenAdsController(
             return
         }
         canRequestAd = false
-        logAds("Native Ad Requested key=$adKey")
+        logAds("AppOpen Ad Requested key=$adKey")
 
         val request = AdRequest.Builder().build()
         AppOpenAd.load(
@@ -50,7 +50,7 @@ class IshfaqAppOpenAdsController(
                     super.onAdLoaded(ad)
 
                     // If your app is going to request only one native ad at a time, set the currentNativeAd reference to null.
-                    logAds("Native Ad Loaded key=$adKey")
+                    logAds("App Open Ad Loaded key=$adKey")
                     currentAppOpenAd?.destroyAd()
                     currentAppOpenAd = null
                     canRequestAd = true

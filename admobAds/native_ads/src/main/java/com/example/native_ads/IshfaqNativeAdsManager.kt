@@ -10,7 +10,7 @@ import com.example.core.commons.NativeConstants.makeGone
 import com.example.native_ads.ui.IshfaqNativeMediaView
 import com.example.native_ads.ui.IshfaqNativeView
 
-class NativeAdsManager(
+class IshfaqNativeAdsManager(
 ) : AdsManager {
 
     private val adsMap = HashMap<String, AdmobNativeAdsController>()

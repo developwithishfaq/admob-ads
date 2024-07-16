@@ -26,7 +26,7 @@ class AdmobNativeAdsController(
     }
 
     override fun loadAd(context: Activity, callback: AdsLoadingStatusListener?) {
-        logAds("loadAd function called,enabled=$adEnabled,")
+        logAds("Native loadAd function called,enabled=$adEnabled,")
         this.listener = callback
         if (adEnabled.not()) {
             listener?.onAdFailedToLoad("Ad is not enabled", -1)

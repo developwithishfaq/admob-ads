@@ -6,17 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.core.AdsController
 import com.example.core.AdsLoadingStatusListener
 import com.example.core.ad_units.core.AdUnit
+import com.example.core.commons.AdsCommons.getGoodName
 import com.example.core.commons.AdsCommons.logAds
 import com.example.core.commons.NativeConstants.inflateLayoutByName
-import com.example.native_ads.NativeAdsManager
+import com.example.native_ads.IshfaqNativeAdsManager
 import com.example.native_ads.R
 import com.example.native_ads.ui.IshfaqNativeView
 import com.facebook.shimmer.ShimmerFrameLayout
-import org.koin.android.ext.android.inject
 
 abstract class IshfaqNativeAdsActivity : AppCompatActivity() {
 
-    private val nativeAdsManager: NativeAdsManager by inject()
+    private var nativeAdsManager: IshfaqNativeAdsManager? = null
     private var nativeAdController: AdsController? = null
     private var nativeAd: AdUnit? = null
 
@@ -35,6 +35,7 @@ abstract class IshfaqNativeAdsActivity : AppCompatActivity() {
         layoutName: String = "native_ad_normal_layout",
         enabled: Boolean,
         adFrame: FrameLayout,
+        nativeAdsManager: IshfaqNativeAdsManager,
         showShimmerLayout: Boolean = true,
         oneTimeUse: Boolean = true
     ) {
@@ -43,6 +44,7 @@ abstract class IshfaqNativeAdsActivity : AppCompatActivity() {
         this.layoutName = layoutName
         this.enabled = enabled
         this.showShimmerLayout = showShimmerLayout
+        this.nativeAdsManager = nativeAdsManager
         this.adLoaded = false
         this.adFrame = adFrame
         isShowAdCalled = true
@@ -67,12 +69,19 @@ abstract class IshfaqNativeAdsActivity : AppCompatActivity() {
         if (showShimmerLayout) {
             showShimmerLayout()
         }
-        nativeAdController = nativeAdsManager.getAdController(key)
+        nativeAdController = nativeAdsManager?.getAdController(key)
         nativeAdController?.loadAd(
             (this@IshfaqNativeAdsActivity), object : AdsLoadingStatusListener {
                 override fun onAdLoaded() {
+                    if (adLoaded) {
+                        return
+                    }
                     adLoaded = true
                     nativeAd = nativeAdController?.getAvailableAd()
+                    logAds(
+                        "${getGoodName()}=On Ad Loaded,Is Ad Ok=${nativeAd != null}",
+                        isError = nativeAd == null
+                    )
                     populateNativeAd()
                 }
 
@@ -112,7 +121,7 @@ abstract class IshfaqNativeAdsActivity : AppCompatActivity() {
                 adFrame?.removeAllViews()
                 adFrame?.addView(layout)
                 layout.findViewById<IshfaqNativeView>(R.id.ishfaqNative)?.let { view ->
-                    (nativeAdsManager as? NativeAdsManager)?.populateAd(view, it) {
+                    (nativeAdsManager as? IshfaqNativeAdsManager)?.populateAd(view, it) {
                         if (oneTimeUse) {
                             destroyLoadedAd()
                         }

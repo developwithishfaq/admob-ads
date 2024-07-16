@@ -11,7 +11,7 @@ import com.google.android.gms.ads.appopen.AppOpenAd
 class AdmobAppOpenAd(
     private val appOpenAd: AppOpenAd
 ) : IshfaqAppOpenAd {
-    override fun showInter(context: Activity, callBack: FullScreenAdsShowListener) {
+    override fun showAppOpen(context: Activity, callBack: FullScreenAdsShowListener) {
         appOpenAd.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdFailedToShowFullScreenContent(p0: AdError) {
                 super.onAdFailedToShowFullScreenContent(p0)
