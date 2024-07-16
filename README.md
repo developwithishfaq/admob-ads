@@ -103,7 +103,7 @@ At First create an instance of IshfaqInterstitialAdsManager.
   val controller = interAdsManager.getAdController("MainInter")
   controller?.loadAd(context = this@MainActivity, callback = null)
 ```
-**Showing Interstitials**
+**Showing Interstitials**<br>
 We can show an interstitial ad like that
 ```
   val controller = interAdsManager.getAdController("MainInter")
@@ -162,7 +162,7 @@ At First create an instance of IshfaqAppOpenAdsManager.
   val controller = appOpenAdsManager.getAdController("MainAppOpen")
   controller?.loadAd(context = activity, callback = null)
 ```
-**Showing AppOpen**
+**Showing AppOpen**<br>
 As App Opens Are Commonly Shown at When User Opens App From Pause State,implementing app open adds is kind of complex,
 So for that we made the whole integration easy.
 
@@ -178,7 +178,7 @@ Extend Your App Class With **IshfaqBaseApp**
   }
 ```
 This will override two functions.
-**onShowAppOpenAd**
+**onShowAppOpenAd**<br>
 This is called after approval of **canShowAppOpenAd**.
 So here in this function we have to write actual code for showing App Open Ad
 
