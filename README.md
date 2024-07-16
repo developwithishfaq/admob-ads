@@ -1,3 +1,22 @@
+## Setup
+> Step 1: Add it to your build.gradle/setting gradle (project):
+```gradle
+allprojects {
+    repositories {
+        maven {
+            url = URI("https://jitpack.io")
+        }
+    }
+}
+```
+> Step 2: Add it to your build.gradle (app)
+
+```gradle
+dependencies {
+     implementation("com.github.developwithishfaq:easy-fcm:1.2.1")
+}
+```
+
 # Ishfaq Ads Sdk
 Using this library we can Easily Implement Admob Ads.
 **Sdk Intialization**
