@@ -49,7 +49,11 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.fb.shimmer)
-
+    implementation(project(":admobAds:app_open"))
+    implementation(project(":admobAds:banner_ads"))
+    implementation(project(":admobAds:core"))
+    implementation(project(":admobAds:inter"))
+    implementation(project(":admobAds:native_ads"))
 }
 
 
