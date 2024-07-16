@@ -8,7 +8,7 @@ Using this library we can Easily Implement Admob Ads.
   adsManager.initAdsSdk(mContext) {
   }
 ```
-**Native Ads Implementation**
+## Native Ads Implementation
 At First create an instance of NativeAdsManager.
 ```
   private val nativeAdsManager: NativeAdsManager by inject()
