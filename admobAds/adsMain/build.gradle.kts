@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -56,7 +57,18 @@ dependencies {
     implementation(project(":admobAds:firebaseConfig"))
     implementation(project(":admobAds:interstitials"))
     implementation(project(":admobAds:nativeAds"))
-//    implementation(project(":admobAds:composeViews"))
+}
 
-
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.developwithishfaq"
+                artifactId = "adsMain"
+                version = "1.0"
+            }
+        }
+    }
 }

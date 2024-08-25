@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     alias(libs.plugins.compose.compiler)
+    id("maven-publish")
 }
 
 android {
@@ -70,4 +71,19 @@ dependencies {
     implementation(project(":admobAds:interstitials"))
     implementation(project(":admobAds:nativeAds"))
 
+}
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.developwithishfaq"
+                artifactId = "debug"
+                version = "1.0"
+            }
+        }
+    }
 }

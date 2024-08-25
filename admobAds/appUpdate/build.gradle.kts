@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -44,4 +45,19 @@ dependencies {
     implementation("com.google.android.play:app-update-ktx:2.1.0")
 
 
+}
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.developwithishfaq"
+                artifactId = "appUpdate"
+                version = "1.0"
+            }
+        }
+    }
 }
