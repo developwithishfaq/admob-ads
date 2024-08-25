@@ -1,11 +1,3 @@
-import java.net.URI
-
-include(":admobAds:app_open")
-
-
-include(":admobAds:banner_ads")
-
-
 pluginManagement {
     repositories {
         google {
@@ -30,7 +22,16 @@ dependencyResolutionManagement {
 
 rootProject.name = "AdsXml"
 include(":app")
-include(":admobAds")
+include(":admobAds:adsMain")
+include(":admobAds:appOpen")
+include(":admobAds:appUpdate")
+include(":admobAds:bannerAds")
+include(":admobAds:composeViews")
+include(":admobAds:consent")
+include(":admobAds:debug")
+include(":admobAds:firebaseConfig")
+include(":admobAds:interstitials")
+include(":admobAds:nativeAds")
+include(":admobAds:rewadedAd")
+include(":admobAds:rewardedInterAds")
 include(":admobAds:core")
-include(":admobAds:inter")
-include(":admobAds:native_ads")
