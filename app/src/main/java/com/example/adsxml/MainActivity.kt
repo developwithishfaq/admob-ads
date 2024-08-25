@@ -7,6 +7,7 @@ import com.example.core.IshfaqAdsSdk
 import com.example.core.ad_units.IshfaqInterstitialAd
 import com.example.core.commons.AdsCommons.logAds
 import com.example.core.commons.IshfaqConfigs
+import com.example.core.commons.NativeTemplates
 import com.example.inter.IshfaqInterstitialAdsManager
 import com.example.native_ads.IshfaqNativeAdsManager
 import com.example.native_ads.base.IshfaqNativeAdsActivity
@@ -48,21 +49,22 @@ class MainActivity : IshfaqNativeAdsActivity() {
             )
         }
 
-        /*
-        nativeAdsManager.addNewController(
-            adKey = "MainNative",
-            adId = IshfaqConfigs.TestBannerId
-        )
-
         showNativeAd(
             key = "MainNative",
-            layoutName = NativeTemplates.TemplateTwo,
+            layoutName = NativeTemplates.TemplateOne,
             enabled = true,
             adFrame = binding.adFrame,
             showShimmerLayout = true,
             oneTimeUse = true,
             nativeAdsManager = nativeAdsManager
         )
+
+        /*
+        nativeAdsManager.addNewController(
+            adKey = "MainNative",
+            adId = IshfaqConfigs.TestBannerId
+        )
+
         showBannerAd(
             key = "MainBanner",
             bannerType = BannerAdSizes.MediumRectangle,
